@@ -1,4 +1,4 @@
-import { Scene, PerspectiveCamera, WebGLRenderer } from 'https://unpkg.com/three@0.126.1/build/three.module.js'
+import { Scene, PerspectiveCamera, WebGLRenderer, Color } from 'https://unpkg.com/three@0.126.1/build/three.module.js'
 import { OrbitControls } from "https://unpkg.com/three@0.126.1/examples/jsm/controls/OrbitControls";
 import {createSculpture, createSculptureWithGeometry} from '/shader-park-core.esm.js';
 
@@ -11,31 +11,33 @@ camera.position.z = 5;
 let renderer = new WebGLRenderer({ antialias: true });
 renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.setPixelRatio( window.devicePixelRatio );
+renderer.setClearColor( new Color(1, 1, 1), 1);
 document.body.appendChild( renderer.domElement );
+
 
 // Shader Park setup
 let spCode = `
-let duration = time / 30 * TWO_PI;
-let animationLoop = abs(sin(duration));
-let oscillation = clamp(abs(sin(duration)) - .6, 0.0, 1.0);
-setStepSize(.13);
-rotateX(animationLoop);
-metal(0.2)
-shine(.1)
-let glo = max(1.3-2.0*dot(-1.0*normal,getRayDirection()),1.);
+let size = input(12, 10, 50.0);
+let gyroidSteps = input(.06, 0, .1)
 let s = getSpace();
-let n = noise(s*5.2*sin(duration)+cos(duration));
-n = sin(n+1000000);
-let col = 1-pow(n, .4);
-let grain = noise(s*100000)*.3;
-color(vec3(0,1, 5)*col);
 
-sphere(0.31);
-expand(abs(n)*0.15+(grain*.02*col));
+let col = vec3(1, 1, 1.5) + normal * .2;
+metal(.2);
+shine(.5)
+col -= length(s);
+color(col);
+
+s += time *.1;
+let sdf = min(gyroidSteps, sin(s.x * size) + sin(s.y * size) + sin(s.z * size));
+setSDF(sdf)
+intersect();
+sphere(.5);
 `
 
 let mesh = createSculpture(spCode, () => ( {
-  time: params.time
+  time: params.time,
+  size: 12,
+  gyroidSteps: .06
 } ));
 
 scene.add(mesh);
@@ -49,7 +51,7 @@ let controls = new OrbitControls( camera, renderer.domElement, {
 
 let render = () => {
   requestAnimationFrame( render );
-  params.time += 0.1;
+  params.time += 0.01;
   controls.update();
   renderer.render( scene, camera );
 };
