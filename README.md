@@ -6,7 +6,7 @@ Click `Show` in the header to see your app live. Updates to your code will insta
 ### ← sp-code.js
 
 This is where you can put your Shader Park code. 
-Just paste your code from Shader Park into the `spCode()` function and it will render
+Just paste your code from Shader Park into the `spCode()` function and it will render.
 
 
 
