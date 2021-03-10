@@ -1,4 +1,4 @@
-import { Scene, PerspectiveCamera, WebGLRenderer, Color} from 'https://unpkg.com/three@0.126.1/build/three.module.js'
+import { Scene, PerspectiveCamera, WebGLRenderer, Color, FontLoader, TextBufferGeometry } from 'https://unpkg.com/three@0.126.1/build/three.module.js'
 import { OrbitControls } from "https://unpkg.com/three@0.126.1/examples/jsm/controls/OrbitControls";
 import { createSculpture, createSculptureWithGeometry } from '/shader-park-core.esm.js';
 import { spCode } from '/sp-code.js';
@@ -15,13 +15,35 @@ renderer.setPixelRatio( window.devicePixelRatio );
 renderer.setClearColor( new Color(1, 1, 1), 1);
 document.body.appendChild( renderer.domElement );
 
-let mesh = createSculpture(spCode, () => ( {
-  time: params.time,
-  size: 12,
-  gyroidSteps: .06
-} ));
+const loader = new FontLoader();
 
-scene.add(mesh);
+loader.load( 'https://cdn.glitch.com/44b034f5-6c9a-414c-96b3-8280ecf82f27%2Fhelvetiker_regular.typeface.json?v=1615399030749', function ( font ) {
+  let geometry = new TextBufferGeometry( 'Hi', {
+    font: font,
+    size: 2,
+    height: .1,
+    curveSegments: 12,
+    bevelEnabled: true,
+    bevelThickness: .01,
+    bevelSize: .1,
+    bevelOffset: 0,
+    bevelSegments: 1
+  } );
+  geometry.computeBoundingSphere();
+  geometry.center();
+  
+  let mesh = createSculptureWithGeometry(geometry, spCode, () => ( {
+    time: params.time,
+    size: 12,
+    gyroidSteps: .06
+  } ));
+  
+  scene.add(mesh);
+} );
+
+
+
+
 
 let controls = new OrbitControls( camera, renderer.domElement, {
   enableDamping : true,
