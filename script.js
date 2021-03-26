@@ -1,6 +1,6 @@
 import { Scene, PerspectiveCamera, WebGLRenderer, Color, FontLoader, TextBufferGeometry } from 'https://unpkg.com/three@0.126.1/build/three.module.js'
 import { OrbitControls } from "https://unpkg.com/three@0.126.1/examples/jsm/controls/OrbitControls";
-import { createSculpture, createSculptureWithGeometry } from '/shader-park-core.esm.js';
+import { createSculpture, createSculptureWithGeometry } from 'https://unpkg.com/shader-park-core@0.0.15/dist/shader-park-core.esm.js';
 import { spCode } from '/sp-code.js';
 
 let scene = new Scene();
@@ -40,10 +40,6 @@ loader.load( 'https://cdn.glitch.com/44b034f5-6c9a-414c-96b3-8280ecf82f27%2Fhelv
   
   scene.add(mesh);
 } );
-
-
-
-
 
 let controls = new OrbitControls( camera, renderer.domElement, {
   enableDamping : true,
