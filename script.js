@@ -20,7 +20,7 @@ const loader = new FontLoader();
 loader.load( 'https://cdn.glitch.com/44b034f5-6c9a-414c-96b3-8280ecf82f27%2Fhelvetiker_regular.typeface.json?v=1615399030749', function ( font ) {
   let geometry = new TextBufferGeometry( 'Hi', {
     font: font,
-    size: 2,
+    size: 4,
     height: .1,
     curveSegments: 12,
     bevelEnabled: true,
@@ -34,8 +34,8 @@ loader.load( 'https://cdn.glitch.com/44b034f5-6c9a-414c-96b3-8280ecf82f27%2Fhelv
   
   let mesh = createSculptureWithGeometry(geometry, spCode, () => ( {
     time: params.time,
-    size: 12,
-    gyroidSteps: .06
+    size: 20,
+    gyroidSteps: .01
   } ));
   
   scene.add(mesh);
