@@ -1,6 +1,6 @@
 import { Scene, PerspectiveCamera, WebGLRenderer, Color, FontLoader, TextBufferGeometry } from 'https://unpkg.com/three@0.126.1/build/three.module.js'
 import { OrbitControls } from "https://unpkg.com/three@0.126.1/examples/jsm/controls/OrbitControls";
-import { createSculpture, createSculptureWithGeometry } from 'https://unpkg.com/shader-park-core@0.0.17/dist/shader-park-core.esm.js';
+import { createSculpture, createSculptureWithGeometry } from 'https://unpkg.com/shader-park-core@0.0.20/dist/shader-park-core.esm.js';
 import { spCode } from '/sp-code.js';
 
 let scene = new Scene();
