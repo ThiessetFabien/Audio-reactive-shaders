@@ -10,7 +10,7 @@ export function spCode() {
   let col = vec3(1, 1, 1.5) + normal * .2;
   metal(.2);
   shine(.5)
-  //color(normal)
+  
   col -= length(s)*.5;
   color(col);
 
