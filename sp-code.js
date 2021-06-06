@@ -11,7 +11,7 @@ export function spCode() {
   metal(.2);
   shine(.5)
   
-  col -= length(s)*.5;
+  col -= length(s)*.7;
   color(col);
 
   //s = vec3(s.x, s.y, s.z-time);
