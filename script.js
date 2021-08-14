@@ -48,6 +48,14 @@ let controls = new OrbitControls( camera, renderer.domElement, {
   rotateSpeed : 0.5
 } );
 
+let onWindowResize = () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize( window.innerWidth, window.innerHeight );
+}
+window.addEventListener( 'resize', onWindowResize );
+
+
 let render = () => {
   requestAnimationFrame( render );
   params.time += 0.01;
