@@ -2,16 +2,18 @@
 let features = {};
 
 let shapeChoise = () => {
-  //put fxRandHere
-  if(Math.random() < .5) {
+  //put fxRand Here
+  if(Math.random() < .4) {
     features['Shape'] = 'Torus';
-    return `torus(.4);`
+    return `
+    rotateX(PI/2);
+    torus(.4, .2);`
   } else {
     features['Shape'] = 'Sphere';
     return 'sphere(.5);'
   }
 }
-window.$fxhashFeatures = features
+
 
 export function spCode() {
   return `
@@ -20,9 +22,10 @@ export function spCode() {
   let pointerDown = input();
   let s = getSpace();
   displace(mouse.x, mouse.y, 0);
-  ${shapeChoise()}
-  sphere(.5);
-  mixGeo(pointerDown);
   box(vec3(.5));
-  `
+  mixGeo(pointerDown);
+  ${shapeChoise()}
+  `;
 }
+
+window.$fxhashFeatures = features;
