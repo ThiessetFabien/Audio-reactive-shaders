@@ -36,7 +36,7 @@ window.addEventListener( 'pointerup', (event) => {
   currPointerDown = 0.0;
 }, false );
 
-let mesh = createSculptureWithGeometry(geometry, spCode, () => ( {
+let mesh = createSculptureWithGeometry(geometry, spCode(), () => ( {
   time: params.time,
   size: 20,
   gyroidSteps: .01,
