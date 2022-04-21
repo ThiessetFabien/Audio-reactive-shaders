@@ -93,7 +93,9 @@ let render = () => {
   params.time += 0.01;
   controls.update();
   if(analyser) {
-    state.avgFreq += Math.abs(analyser.getAverageFrequency()*.001);
+    state.avgFreq += Math.pow((analyser.getFrequencyData()[1]/255)*.8, 8)
+    console.log(Math.pow((analyser.getFrequencyData()[1]/255)*.5, 8))
+    //state.avgFreq += Math.abs(analyser.getAverageFrequency()*.001);
   }
   state.pointerDown = .1*state.currPointerDown + .9*state.pointerDown;
   state.mouse.lerp(state.currMouse, .05 );

@@ -6,7 +6,7 @@ export function spCode() {
   return `
     let avgFreq = input();
     let pointerDown = input();
-    rotateY(mouse.x * PI / 2 + time*.01+avgFreq);
+    rotateY(mouse.x * PI / 2 +avgFreq);
     rotateX(mouse.y * PI / 2);
     metal(.5);
     shine(.4);
