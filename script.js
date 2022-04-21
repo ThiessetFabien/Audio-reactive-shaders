@@ -39,8 +39,7 @@ audioLoader.load( 'https://cdn.glitch.global/59b80ec2-4e5b-4b54-b910-f3441cac0fd
   button.addEventListener('pointerdown', () => {
     sound.play();
     button.style.display = 'none';
-}, false);
-	
+  }, false);
 });
 
 
