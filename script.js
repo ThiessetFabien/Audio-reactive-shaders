@@ -55,7 +55,8 @@ let state = {
   currMouse : new Vector3(),
   pointerDown: 0.0,
   currPointerDown: 0.0,
-  avgFreq: 0.0
+  audioInc: 0.0,
+  audio: 0.0
 }
 
 window.addEventListener( 'pointermove', (event) => {
@@ -71,7 +72,8 @@ window.addEventListener( 'pointerup', (event) => state.currPointerDown = 0.0, fa
 let mesh = createSculptureWithGeometry(geometry, spCode(), () => ( {
   time: params.time,
   pointerDown: state.pointerDown,
-  audio: state.avgFreq,
+  audioInc: state.audioInc,
+  audio: state.audio,
   mouse: state.mouse,
   _scale : .5
 } ));
@@ -99,7 +101,8 @@ let render = () => {
   params.time += 0.01;
   controls.update();
   if(analyser) {
-    state.avgFreq += Math.pow((analyser.getFrequencyData()[2]/255)*.85, 8)
+    state.audioInc += Math.pow((analyser.getFrequencyData()[2]/255)*.85, 8)
+    state.audio = Math.pow((analyser.getFrequencyData()[2]/255)*.85, 8)
   }
   state.pointerDown = .1*state.currPointerDown + .9*state.pointerDown;
   state.mouse.lerp(state.currMouse, .05 );
