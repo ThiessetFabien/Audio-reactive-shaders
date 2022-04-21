@@ -65,7 +65,7 @@ window.addEventListener( 'pointerup', (event) => state.currPointerDown = 0.0, fa
 let mesh = createSculptureWithGeometry(geometry, spCode(), () => ( {
   time: params.time,
   pointerDown: state.pointerDown,
-  avgFreq: state.avgFreq,
+  audio: state.avgFreq,
   mouse: state.mouse,
   _scale : .5
 } ));
@@ -93,7 +93,7 @@ let render = () => {
   params.time += 0.01;
   controls.update();
   if(analyser) {
-    state.avgFreq += Math.pow((analyser.getFrequencyData()[1]/255)*.8, 8)
+    state.avgFreq += Math.pow((analyser.getFrequencyData()[2]/255)*.8, 8)
     console.log(Math.pow((analyser.getFrequencyData()[1]/255)*.5, 8))
     //state.avgFreq += Math.abs(analyser.getAverageFrequency()*.001);
   }
