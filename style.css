@@ -10,12 +10,20 @@ h1 {
   color: #373fff;
 }
 
+/* canvas {
+    display: block;
+}
+ */
+
 .container {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100vw;
-  height: 100vh;
+  height: 70vh;
+/*   min-height: 100%; */
+  margin: 0;
+/*   height: 100vh; */
   position: absolute;  
 }
 
