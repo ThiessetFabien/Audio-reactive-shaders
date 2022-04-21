@@ -1,4 +1,4 @@
-
+import {AudioListener, Audio, AudioLoader, AudioAnalyser} from 'three';
 import { Scene, SphereGeometry, Vector3, PerspectiveCamera, WebGLRenderer, Color } from 'three';
 import { OrbitControls } from 'https://unpkg.com/three@0.138.3/examples/jsm/controls/OrbitControls.js';
 import { createSculpture, createSculptureWithGeometry } from 'https://unpkg.com/shader-park-core/dist/shader-park-core.esm.js';
@@ -15,6 +15,32 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.setPixelRatio( window.devicePixelRatio );
 renderer.setClearColor( new Color(1, 1, 1), 1);
 document.body.appendChild( renderer.domElement );
+
+// AUDIO
+
+// create an AudioListener and add it to the camera
+const listener = new AudioListener();
+camera.add( listener );
+
+// create an Audio source
+const sound = new Audio( listener );
+
+// load a sound and set it as the Audio object's buffer
+const audioLoader = new AudioLoader();
+audioLoader.load( 'https://cdn.glitch.global/59b80ec2-4e5b-4b54-b910-f3441cac0fd6/1%20One%20or%20Won%20Day%202836.mp3?v=1650560932075', function( buffer ) {
+	sound.setBuffer( buffer );
+	sound.setLoop(true);
+	sound.setVolume(0.5);
+	sound.play();
+});
+
+// create an AudioAnalyser, passing in the sound and desired fftSize
+const analyser = new AudioAnalyser( sound, 32 );
+
+// get the average frequency of the sound
+const audioData = analyser.getAverageFrequency();
+
+
 
 let geometry  = new SphereGeometry(2, 45, 45);
 
