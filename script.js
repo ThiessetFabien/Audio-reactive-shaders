@@ -39,9 +39,6 @@ const analyser = new AudioAnalyser( sound, 32 );
 
 // get the average frequency of the sound
 
-
-
-
 let geometry  = new SphereGeometry(2, 45, 45);
 
 let state = {
@@ -93,9 +90,7 @@ let render = () => {
   params.time += 0.01;
   controls.update();
   if(analyser) {
-    state.avgFreq += Math.pow((analyser.getFrequencyData()[2]/255)*.8, 8)
-    console.log(Math.pow((analyser.getFrequencyData()[1]/255)*.5, 8))
-    //state.avgFreq += Math.abs(analyser.getAverageFrequency()*.001);
+    state.avgFreq += Math.pow((analyser.getFrequencyData()[2]/255)*.85, 8)
   }
   state.pointerDown = .1*state.currPointerDown + .9*state.pointerDown;
   state.mouse.lerp(state.currMouse, .05 );
