@@ -25,6 +25,9 @@ camera.add( listener );
 // create an Audio source
 const sound = new Audio( listener );
 
+
+let button = document.querySelector('.button');
+
 // load a sound and set it as the Audio object's buffer
 const audioLoader = new AudioLoader();
 audioLoader.load( 'https://cdn.glitch.global/59b80ec2-4e5b-4b54-b910-f3441cac0fd6/1%20or%20won%20Beat.m4a?v=1650562076005', function( buffer ) {
@@ -33,6 +36,7 @@ audioLoader.load( 'https://cdn.glitch.global/59b80ec2-4e5b-4b54-b910-f3441cac0fd
 	sound.setVolume(0.5);
 	sound.play();
 });
+
 
 // create an AudioAnalyser, passing in the sound and desired fftSize
 const analyser = new AudioAnalyser( sound, 32 );
