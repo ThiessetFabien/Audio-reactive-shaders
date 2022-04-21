@@ -18,36 +18,35 @@ document.body.appendChild( renderer.domElement );
 
 let geometry  = new SphereGeometry(2, 45, 45);
 
-let currMouse = new Vector3();
-let mouse = new Vector3();
-let pointerDown = 0.0;
-let currPointerDown = 0.0;
+let state = {
+  mouse : new Vector3(),
+  currMouse : new Vector3(),
+  pointerDown: 0.0,
+  currPointerDown: 0.0
+}
 
 window.addEventListener( 'pointermove', (event) => {
-  currMouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-	currMouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+  state.currMouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+	state.currMouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 }, false );
 
-window.addEventListener( 'pointerdown', (event) => {
-  currPointerDown = 1.0;
-}, false );
+window.addEventListener( 'pointerdown', (event) => state.currPointerDown = 1.0, false );
+window.addEventListener( 'pointerup', (event) => state.currPointerDown = 0.0, false );
 
-window.addEventListener( 'pointerup', (event) => {
-  currPointerDown = 0.0;
-}, false );
 
+// Create Shader Park Sculpture
 let mesh = createSculptureWithGeometry(geometry, spCode(), () => ( {
   time: params.time,
   size: 20,
   gyroidSteps: .01,
-  pointerDown,
-  mouse,
+  pointerDown: state.pointerDown,
+  mouse: state.mouse,
   _scale : .5
 } ));
 
 scene.add(mesh);
 
-
+// Add Controlls
 let controls = new OrbitControls( camera, renderer.domElement, {
   enableDamping : true,
   dampingFactor : 0.25,
@@ -67,8 +66,8 @@ let render = () => {
   requestAnimationFrame( render );
   params.time += 0.01;
   controls.update();
-  pointerDown = .1*currPointerDown + .9*pointerDown;
-  mouse.lerp(currMouse, .05 );
+  state.pointerDown = .1*state.currPointerDown + .9*state.pointerDown;
+  state.mouse.lerp(state.currMouse, .05 );
   renderer.render( scene, camera );
 };
 
