@@ -1,31 +1,20 @@
 /* eslint-disable */
-let features = {};
 
-let shapeChoise = () => {
-  //put fxRand Here
-  if(Math.random() < .4) {
-    features['Shape'] = 'Torus';
-    return `
-    rotateX(PI/2);
-    torus(.4, .2);`
-  } else {
-    features['Shape'] = 'Sphere';
-    return 'sphere(.5);'
-  }
-}
 
 
 export function spCode() {
   return `
-  let size = input(12, 10, 50.0);
-  let gyroidSteps = input(.06, 0, .1)
-  let pointerDown = input();
-  let s = getSpace();
-  displace(mouse.x, mouse.y, 0);
-  box(vec3(.5));
-  mixGeo(pointerDown);
-  ${shapeChoise()}
+    let avgFreq = input();
+    let pointerDown = input();
+    rotateY(mouse.x * PI / 2 + time*.01+avgFreq);
+    rotateX(mouse.y * PI / 2);
+    metal(.5);
+    shine(.4);
+    color(getRayDirection()+.2);
+    rotateY(getRayDirection().y*4+time)
+    boxFrame(vec3(.4), .02);
+    expand(.02);
+    blend(nsin(time)*.6)
+    sphere(.2);
   `;
 }
-
-window.$fxhashFeatures = features;

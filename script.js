@@ -27,7 +27,7 @@ const sound = new Audio( listener );
 
 // load a sound and set it as the Audio object's buffer
 const audioLoader = new AudioLoader();
-audioLoader.load( 'https://cdn.glitch.global/59b80ec2-4e5b-4b54-b910-f3441cac0fd6/1%20One%20or%20Won%20Day%202836.mp3?v=1650560932075', function( buffer ) {
+audioLoader.load( 'https://cdn.glitch.global/59b80ec2-4e5b-4b54-b910-f3441cac0fd6/1%20or%20won%20Beat.m4a?v=1650562076005', function( buffer ) {
 	sound.setBuffer( buffer );
 	sound.setLoop(true);
 	sound.setVolume(0.5);
@@ -38,7 +38,7 @@ audioLoader.load( 'https://cdn.glitch.global/59b80ec2-4e5b-4b54-b910-f3441cac0fd
 const analyser = new AudioAnalyser( sound, 32 );
 
 // get the average frequency of the sound
-const audioData = analyser.getAverageFrequency();
+
 
 
 
@@ -48,7 +48,8 @@ let state = {
   mouse : new Vector3(),
   currMouse : new Vector3(),
   pointerDown: 0.0,
-  currPointerDown: 0.0
+  currPointerDown: 0.0,
+  avgFreq: 0.0
 }
 
 window.addEventListener( 'pointermove', (event) => {
@@ -63,9 +64,8 @@ window.addEventListener( 'pointerup', (event) => state.currPointerDown = 0.0, fa
 // Create Shader Park Sculpture
 let mesh = createSculptureWithGeometry(geometry, spCode(), () => ( {
   time: params.time,
-  size: 20,
-  gyroidSteps: .01,
   pointerDown: state.pointerDown,
+  avgFreq: state.avgFreq,
   mouse: state.mouse,
   _scale : .5
 } ));
@@ -92,6 +92,9 @@ let render = () => {
   requestAnimationFrame( render );
   params.time += 0.01;
   controls.update();
+  if(analyser) {
+    state.avgFreq += Math.abs(analyser.getAverageFrequency()*.001);
+  }
   state.pointerDown = .1*state.currPointerDown + .9*state.pointerDown;
   state.mouse.lerp(state.currMouse, .05 );
   renderer.render( scene, camera );
