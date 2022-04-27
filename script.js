@@ -10,10 +10,10 @@ let params = { time: 0 };
 let camera = new PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
 camera.position.z = 1.5;
 
-let renderer = new WebGLRenderer({ antialias: true });
+let renderer = new WebGLRenderer({ antialias: true, transparent: true });
 renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.setPixelRatio( window.devicePixelRatio );
-renderer.setClearColor( new Color(1, 1, 1), 1);
+renderer.setClearColor( new Color(1, 1, 1), 0);
 document.body.appendChild( renderer.domElement );
 
 // AUDIO
