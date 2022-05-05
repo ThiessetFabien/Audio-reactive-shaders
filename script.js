@@ -1,5 +1,5 @@
 import { AudioListener, Audio, AudioLoader, AudioAnalyser } from 'three';
-import { Scene, SphereGeometry, Vector3, PerspectiveCamera, WebGLRenderer, Color } from 'three';
+import { Scene, SphereGeometry, Vector3, PerspectiveCamera, WebGLRenderer, Color, MeshStandardMaterial, Mesh } from 'three';
 import { OrbitControls } from 'https://unpkg.com/three@0.140/examples/jsm/controls/OrbitControls.js';
 import { createSculpture, createSculptureWithGeometry } from 'https://unpkg.com/shader-park-core/dist/shader-park-core.esm.js';
 import { spCode } from '/sp-code.js';
@@ -47,7 +47,7 @@ const analyser = new AudioAnalyser( sound, 32 );
 
 // get the average frequency of the sound
 
-let geometry  = new SphereGeometry(2, 45, 45);
+
 
 let state = {
   mouse : new Vector3(),
@@ -66,6 +66,10 @@ window.addEventListener( 'pointerdown', (event) => state.currPointerDown = 1.0, 
 window.addEventListener( 'pointerup', (event) => state.currPointerDown = 0.0, false );
 
 
+let geometry  = new SphereGeometry(2, 45, 45);
+//let mat = new MeshBasicMaterial();
+let material = new MeshStandardMaterial( { color: 0x33aaee } );
+
 // Create Shader Park Sculpture
 let mesh = createSculptureWithGeometry(geometry, spCode(), () => ( {
   time: params.time,
@@ -74,6 +78,8 @@ let mesh = createSculptureWithGeometry(geometry, spCode(), () => ( {
   mouse: state.mouse,
   _scale : .5
 } ));
+
+mesh = new Mesh(material, geometry);
 
 scene.add(mesh);
 
