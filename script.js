@@ -67,7 +67,7 @@ window.addEventListener( 'pointerup', (event) => state.currPointerDown = 0.0, fa
 let geometry  = new SphereGeometry(2, 45, 45);
 let material = new MeshBasicMaterial( { color: 0x33aaee } );
 
-// // Create Shader Park Sculpture
+// // // Create Shader Park Sculpture
 let mesh = createSculptureWithGeometry(geometry, spCode(), () => ( {
   time: params.time,
   pointerDown: state.pointerDown,
