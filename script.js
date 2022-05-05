@@ -67,7 +67,6 @@ window.addEventListener( 'pointerup', (event) => state.currPointerDown = 0.0, fa
 
 
 let geometry  = new SphereGeometry(2, 45, 45);
-//let mat = new MeshBasicMaterial();
 let material = new MeshStandardMaterial( { color: 0x33aaee } );
 
 // Create Shader Park Sculpture
@@ -79,7 +78,8 @@ let mesh = createSculptureWithGeometry(geometry, spCode(), () => ( {
   _scale : .5
 } ));
 
-mesh = new Mesh(material, geometry);
+
+mesh = new Mesh(geometry, material);
 
 scene.add(mesh);
 
