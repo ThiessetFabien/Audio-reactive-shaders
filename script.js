@@ -68,14 +68,13 @@ let geometry  = new SphereGeometry(2, 45, 45);
 let material = new MeshBasicMaterial( { color: 0x33aaee } );
 
 // // // Create Shader Park Sculpture
-let mesh = createSculptureWithGeometry(geometry, spCode(), () => ( {
+let mesh = createSculptureWithGeometry(geometry, 'box(vec3(5.5))', () => ( {
   time: params.time,
-  pointerDown: state.pointerDown,
-  audio: state.audio,
-  mouse: state.mouse,
+  // pointerDown: state.pointerDown,
+  // audio: state.audio,
+  // mouse: state.mouse,
   _scale : .5
 } ));
-
 
 //let mesh = new Mesh(geometry, material);
 
