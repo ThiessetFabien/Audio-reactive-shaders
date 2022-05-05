@@ -1,5 +1,5 @@
 import { AudioListener, Audio, AudioLoader, AudioAnalyser } from 'three';
-import { Scene, SphereGeometry, Vector3, PerspectiveCamera, WebGLRenderer, Color, MeshStandardMaterial, Mesh } from 'three';
+import { Scene, SphereGeometry, Vector3, PerspectiveCamera, WebGLRenderer, Color, MeshBasicMaterial, MeshStandardMaterial, Mesh } from 'three';
 import { OrbitControls } from 'https://unpkg.com/three@0.140/examples/jsm/controls/OrbitControls.js';
 import { createSculpture, createSculptureWithGeometry } from 'https://unpkg.com/shader-park-core/dist/shader-park-core.esm.js';
 import { spCode } from '/sp-code.js';
@@ -43,10 +43,8 @@ audioLoader.load( 'https://cdn.glitch.global/59b80ec2-4e5b-4b54-b910-f3441cac0fd
 
 
 // create an AudioAnalyser, passing in the sound and desired fftSize
-const analyser = new AudioAnalyser( sound, 32 );
-
 // get the average frequency of the sound
-
+const analyser = new AudioAnalyser( sound, 32 );
 
 
 let state = {
@@ -67,9 +65,9 @@ window.addEventListener( 'pointerup', (event) => state.currPointerDown = 0.0, fa
 
 
 let geometry  = new SphereGeometry(2, 45, 45);
-let material = new MeshStandardMaterial( { color: 0x33aaee } );
+let material = new MeshBasicMaterial( { color: 0x33aaee } );
 
-// Create Shader Park Sculpture
+// // Create Shader Park Sculpture
 let mesh = createSculptureWithGeometry(geometry, spCode(), () => ( {
   time: params.time,
   pointerDown: state.pointerDown,
@@ -79,7 +77,7 @@ let mesh = createSculptureWithGeometry(geometry, spCode(), () => ( {
 } ));
 
 
-mesh = new Mesh(geometry, material);
+//let mesh = new Mesh(geometry, material);
 
 scene.add(mesh);
 
