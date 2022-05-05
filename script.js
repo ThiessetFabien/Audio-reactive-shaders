@@ -1,6 +1,6 @@
 import { AudioListener, Audio, AudioLoader, AudioAnalyser } from 'three';
 import { Scene, SphereGeometry, Vector3, PerspectiveCamera, WebGLRenderer, Color } from 'three';
-import { OrbitControls } from 'https://unpkg.com/three@0.139/examples/jsm/controls/OrbitControls.js';
+import { OrbitControls } from 'https://unpkg.com/three@0.140/examples/jsm/controls/OrbitControls.js';
 import { createSculpture, createSculptureWithGeometry } from 'https://unpkg.com/shader-park-core/dist/shader-park-core.esm.js';
 import { spCode } from '/sp-code.js';
 
@@ -90,8 +90,8 @@ let onWindowResize = () => {
   camera.updateProjectionMatrix();
   renderer.setSize( window.innerWidth, window.innerHeight );
 }
-window.addEventListener( 'resize', onWindowResize );
 
+window.addEventListener( 'resize', onWindowResize );
 
 let render = () => {
   requestAnimationFrame( render );
@@ -100,7 +100,7 @@ let render = () => {
   if(analyser) {
     state.audio += Math.pow((analyser.getFrequencyData()[2]/255)*.85, 8)
   }
-  state.pointerDown = .1*state.currPointerDown + .9*state.pointerDown;
+  state.pointerDown = .1 * state.currPointerDown + .9 * state.pointerDown;
   state.mouse.lerp(state.currMouse, .05 );
   renderer.render( scene, camera );
 };
