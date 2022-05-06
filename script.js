@@ -19,6 +19,14 @@ let mesh = new Mesh(geometry, material);
 
 scene.add(mesh);
 
+// Add Controlls
+let controls = new OrbitControls( camera, renderer.domElement, {
+  enableDamping : true,
+  dampingFactor : 0.25,
+  zoomSpeed : 0.5,
+  rotateSpeed : 0.5
+} );
+
 let onWindowResize = () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
