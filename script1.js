@@ -69,7 +69,6 @@ window.addEventListener( 'pointerup', (event) => state.currPointerDown = 0.0, fa
 
 
 let geometry  = new SphereGeometry(2, 45, 45);
-// let material = new MeshBasicMaterial( { color: 0x33aaee } );
 
 // // // Create Shader Park Sculpture
 let mesh = createSculptureWithGeometry(geometry, spCode(), () => ( {
@@ -79,8 +78,6 @@ let mesh = createSculptureWithGeometry(geometry, spCode(), () => ( {
   mouse: state.mouse,
   _scale : .5
 } ));
-
-// let mesh = new Mesh(geometry, material);
 
 scene.add(mesh);
 
@@ -102,11 +99,11 @@ window.addEventListener( 'resize', onWindowResize );
 
 let render = () => {
   requestAnimationFrame( render );
-  
   state.time += clock.getDelta();
   controls.update();
   if(analyser) {
-    state.audio += Math.pow((analyser.getFrequencyData()[2]/255)*.81, 8) + state.time*.0005
+    state.audio += Math.pow((analyser.getFrequencyData()[2]/255)*.81, 8) + clock.getDelta()*.0005
+    
   }
   state.pointerDown = .1 * state.currPointerDown + .9 * state.pointerDown;
   state.mouse.lerp(state.currMouse, .05 );
