@@ -1,10 +1,11 @@
-import { AudioListener, Audio, AudioLoader, AudioAnalyser } from 'three';
+import { AudioListener, Audio, AudioLoader, AudioAnalyser, Clock } from 'three';
 import { Scene, SphereGeometry, Vector3, PerspectiveCamera, WebGLRenderer, Color, MeshBasicMaterial, MeshStandardMaterial, Mesh } from 'three';
 import { OrbitControls } from 'https://unpkg.com/three@0.140/examples/jsm/controls/OrbitControls.js';
 import { createSculptureWithGeometry } from 'https://unpkg.com/shader-park-core/dist/shader-park-core.esm.js';
 import { spCode } from '/sp-code.js';
 
 let scene = new Scene();
+
 
 
 let camera = new PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
@@ -15,6 +16,8 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.setPixelRatio( window.devicePixelRatio );
 renderer.setClearColor( new Color(1, 1, 1), 0);
 document.body.appendChild( renderer.domElement );
+
+let clock = new Clock();
 
 // AUDIO
 
@@ -30,7 +33,7 @@ button.innerHTML = "Loading Audio..."
 
 // load a sound and set it as the Audio object's buffer
 const audioLoader = new AudioLoader();
-audioLoader.load( 'https://cdn.glitch.global/59b80ec2-4e5b-4b54-b910-f3441cac0fd6/1%20or%20won%20Beat.m4a?v=1650562076005', function( buffer ) {
+audioLoader.load( 'https://cdn.glitch.global/59b80ec2-4e5b-4b54-b910-f3441cac0fd6/OP1Beat.wav?v=1667084272689', function( buffer ) {
 	sound.setBuffer( buffer );
 	sound.setLoop(true);
 	sound.setVolume(0.5);
@@ -99,10 +102,11 @@ window.addEventListener( 'resize', onWindowResize );
 
 let render = () => {
   requestAnimationFrame( render );
-  state.time += 0.01;
+  
+  state.time += clock.getDelta();
   controls.update();
   if(analyser) {
-    state.audio += Math.pow((analyser.getFrequencyData()[2]/255)*.85, 8)
+    state.audio += Math.pow((analyser.getFrequencyData()[2]/255)*.81, 8) + state.time*.0005
   }
   state.pointerDown = .1 * state.currPointerDown + .9 * state.pointerDown;
   state.mouse.lerp(state.currMouse, .05 );
