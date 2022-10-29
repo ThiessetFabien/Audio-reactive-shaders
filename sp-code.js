@@ -2,6 +2,7 @@ export function spCode() {
   return `
     let audio = input();
     let pointerDown = input();
+    
     metal(.5);
     shine(.5);
     setMaxIterations(5);

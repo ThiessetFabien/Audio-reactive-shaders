@@ -56,6 +56,7 @@ let state = {
   pointerDown: 0.0,
   currPointerDown: 0.0,
   audio: 0.0,
+  currAudio: 0.0,
   time: 0.0
 }
 
@@ -102,8 +103,8 @@ let render = () => {
   state.time += clock.getDelta();
   controls.update();
   if(analyser) {
-    state.audio += Math.pow((analyser.getFrequencyData()[2]/255)*.81, 8) + clock.getDelta()*.0005
-    
+    state.currAudio += Math.pow((analyser.getFrequencyData()[2]/255)*.81, 8) + clock.getDelta()*.0005;
+    state.audio = .2 * state.currAudio + .8 * state.audio;
   }
   state.pointerDown = .1 * state.currPointerDown + .9 * state.pointerDown;
   state.mouse.lerp(state.currMouse, .05 );
