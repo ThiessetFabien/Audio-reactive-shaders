@@ -1,12 +1,9 @@
-import { AudioListener, Audio, AudioLoader, AudioAnalyser, Clock } from 'three';
 import { Scene, SphereGeometry, Vector3, PerspectiveCamera, WebGLRenderer, Color, MeshBasicMaterial, MeshStandardMaterial, Mesh } from 'three';
 import { OrbitControls } from 'https://unpkg.com/three@0.140/examples/jsm/controls/OrbitControls.js';
 import { createSculptureWithGeometry } from 'https://unpkg.com/shader-park-core/dist/shader-park-core.esm.js';
 import { spCode } from '/sp-code.js';
 
 let scene = new Scene();
-
-
 
 let camera = new PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
 camera.position.z = 1.5;
@@ -17,10 +14,7 @@ renderer.setPixelRatio( window.devicePixelRatio );
 renderer.setClearColor( new Color(1, 1, 1), 0);
 document.body.appendChild( renderer.domElement );
 
-let clock = new Clock();
-
 // AUDIO
-
 // create an AudioListener and add it to the camera
 const listener = new AudioListener();
 camera.add( listener );
@@ -43,11 +37,6 @@ audioLoader.load( 'https://cdn.glitch.global/59b80ec2-4e5b-4b54-b910-f3441cac0fd
     button.style.display = 'none';
   }, false);
 });
-
-
-// create an AudioAnalyser, passing in the sound and desired fftSize
-// get the average frequency of the sound
-const analyser = new AudioAnalyser( sound, 32 );
 
 
 let state = {
