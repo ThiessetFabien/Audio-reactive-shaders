@@ -19,9 +19,9 @@ button.innerHTML = "Loading Audio..."
 button.style.display = 'none';
 
 let geometry  = new SphereGeometry(2, 45, 45);
-let material = new MeshBasicMaterial( { color: 0x33aaee} );
-
-let mesh = new Mesh(geometry, material);
+// let material = new MeshBasicMaterial( { color: 0x33aaee} );
+// let mesh = new Mesh(geometry, material);
+let mesh = createSculptureWithGeometry(geometry, 'box(vec3(1))')
 
 scene.add(mesh);
 
