@@ -34,6 +34,7 @@ let material = new MeshBasicMaterial( { color: 0x33aaee} );
 
 let mesh = new Mesh(geometry, material);
 
+
 scene.add(mesh);
 
 // Add Controlls

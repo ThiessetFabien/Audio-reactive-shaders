@@ -1,5 +1,6 @@
 import { Scene, SphereGeometry, PerspectiveCamera, WebGLRenderer, Color, MeshBasicMaterial, Mesh } from 'three';
 import { OrbitControls } from 'https://unpkg.com/three@0.140/examples/jsm/controls/OrbitControls.js';
+import { createSculptureWithGeometry } from 'https://unpkg.com/shader-park-core/dist/shader-park-core.esm.js';
 
 let scene = new Scene();
 
@@ -14,8 +15,12 @@ document.body.appendChild( renderer.domElement );
 
 
 let geometry  = new SphereGeometry(2, 45, 45);
-let material = new MeshBasicMaterial( { color: 0x33aaee } );
-let mesh = new Mesh(geometry, material);
+// let material = new MeshBasicMaterial( { color: 0x33aaee } );
+// let mesh = new Mesh(geometry, material);
+let mesh = createSculptureWithGeometry(geometry, 'sphere(.7)', () => ( {
+  time: 0
+} ));
+
 
 scene.add(mesh);
 
