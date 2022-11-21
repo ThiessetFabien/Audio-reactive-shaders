@@ -1,7 +1,7 @@
 export function spCode() {
   return `
     let pointerDown = input(0);
-    let audio = input();
+    let audio = time //input();
 
     setMaxIterations(5);
 
