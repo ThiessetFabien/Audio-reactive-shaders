@@ -1,7 +1,9 @@
-import { Scene, SphereGeometry, Vector3, PerspectiveCamera, WebGLRenderer, Color, MeshBasicMaterial, Mesh } from 'three';
-import { OrbitControls } from 'https://unpkg.com/three@0.140/examples/jsm/controls/OrbitControls.js';
+import { Scene, SphereGeometry, Vector3, PerspectiveCamera, WebGLRenderer, Color, MeshBasicMaterial, Mesh, Clock } from 'three';
+import { OrbitControls } from 'https://unpkg.com/three@0.146/examples/jsm/controls/OrbitControls.js';
 import { createSculptureWithGeometry } from 'https://unpkg.com/shader-park-core/dist/shader-park-core.esm.js';
 import { spCode } from '/sp-code.js';
+
+
 
 let scene = new Scene();
 
@@ -14,14 +16,17 @@ renderer.setPixelRatio( window.devicePixelRatio );
 renderer.setClearColor( new Color(1, 1, 1), 0);
 document.body.appendChild( renderer.domElement );
 
+let clock = new Clock();
+
+
 let button = document.querySelector('.button');
 button.innerHTML = "Loading Audio..."
 button.style.display = 'none';
 
 let geometry  = new SphereGeometry(2, 45, 45);
-// let material = new MeshBasicMaterial( { color: 0x33aaee} );
-// let mesh = new Mesh(geometry, material);
-let mesh = createSculptureWithGeometry(geometry, spCode())
+let material = new MeshBasicMaterial( { color: 0x33aaee} );
+let mesh = new Mesh(geometry, material);
+// let mesh = createSculptureWithGeometry(geometry, spCode())
 
 scene.add(mesh);
 
