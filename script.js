@@ -20,6 +20,16 @@ let button = document.querySelector('.button');
 button.innerHTML = "Loading Audio..."
 button.style.display = 'none';
 
+let state = {
+  mouse : new Vector3(),
+  currMouse : new Vector3(),
+  pointerDown: 0.0,
+  currPointerDown: 0.0,
+  // audio: 0.0,
+  // currAudio: 0.0,
+  time: 0.0,
+}
+
 // create our geometry and material
 let geometry  = new SphereGeometry(2, 45, 45);
 let material = new MeshBasicMaterial( { color: 0x33aaee} );
@@ -29,22 +39,12 @@ let mesh = createSculptureWithGeometry(geometry, spCode(), () => {
   return {
     time: state.time,
     pointerDown: state.pointerDown,
-    audio: state.audio,
     mouse: state.mouse,
+    // audio: state.audio,
   }
 })
 
 scene.add(mesh);
-
-let state = {
-  mouse : new Vector3(),
-  currMouse : new Vector3(),
-  pointerDown: 0.0,
-  currPointerDown: 0.0,
-  // audio: 0.0,
-  // currAudio: 0.0,
-  time: 0.0
-}
 
 window.addEventListener( 'pointermove', (event) => {
   state.currMouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
@@ -70,11 +70,10 @@ let onWindowResize = () => {
 
 window.addEventListener( 'resize', onWindowResize );
 
-// runs every loop
+
 let render = () => {
   requestAnimationFrame( render );
   state.time += clock.getDelta();
-  
   state.pointerDown = .1 * state.currPointerDown + .9 * state.pointerDown;
   state.mouse.lerp(state.currMouse, .05 );
   controls.update();
