@@ -23,8 +23,8 @@ button.style.display = 'none';
 let state = {
   mouse : new Vector3(),
   currMouse : new Vector3(),
-  pointerDown: 0.0,
-  currPointerDown: 0.0,
+  // pointerDown: 0.0,
+  // currPointerDown: 0.0,
   // audio: 0.0,
   // currAudio: 0.0,
   time: 0.0,
