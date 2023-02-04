@@ -38,7 +38,7 @@ let geometry  = new SphereGeometry(2, 45, 45);
 let mesh = createSculptureWithGeometry(geometry, spCode(), () => {
   return {
     time: state.time,
-    pointerDown: state.pointerDown,
+    // pointerDown: state.pointerDown,
     mouse: state.mouse,
     // audio: state.audio,
   }
